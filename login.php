@@ -40,7 +40,7 @@
             </ul>
             
               <a class="btn btn-outline-primary text-white" href="register.php">Sign Up</a>&nbsp;&nbsp;
-              <a class="btn btn-outline-success text-white" href="login.php">Login</a>
+              <a class="btn btn-outline-success text-white active" href="login.php">Login</a>
 
             </form>
           </div>

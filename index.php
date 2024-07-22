@@ -15,6 +15,16 @@
             background-color: #fcf9cd;
         }
 
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
     </style>
 </head>
   <body>
@@ -45,7 +55,11 @@
     <center><h1>The Blog Project</h1></center>
     </div>
 
-
+    <footer>
+        <div class="container">
+            © 2024 Blog Platform. All rights reserved.
+        </div>
+    </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

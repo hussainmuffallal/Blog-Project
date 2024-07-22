@@ -28,6 +28,7 @@ $confirmpassword = $_POST['confirmpassword'];
 // Prepare and execute the SQL query to insert the data into the Employee table
 $sql = "INSERT INTO user (email, firstName, lastName, password, confirmpassword) VALUES ('$email', '$firstName', '$lastName', '$password', '$password')";
 
+// Check if the passwords match
 if ($confirmpassword !== $password) {
     header('Location:register.php?error2');
     exit();

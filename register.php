@@ -38,7 +38,7 @@
               </li>
             </ul>
             
-              <a class="btn btn-outline-primary text-white" href="register.php">Sign Up</a>&nbsp;&nbsp;
+              <a class="btn btn-outline-primary text-white active" href="register.php">Sign Up</a>&nbsp;&nbsp;
               <a class="btn btn-outline-success text-white" href="login.php">Login</a>
 
             </form>
