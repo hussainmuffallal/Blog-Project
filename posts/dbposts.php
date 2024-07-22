@@ -24,8 +24,8 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the form data
     $title = $_POST['title'];
+    $cdate = $_GET['cdate'];
     $content = $_POST['content'];
-    $cdate = date('Y-m-d H:i:s');
     $email=$_SESSION['userloggedin'];
 
 
@@ -47,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
 
     // Prepare and execute the SQL statement
-    $stmt = $conn->prepare("INSERT INTO post (Content,Title,email) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $content, $title,$email);
+    $stmt = $conn->prepare("INSERT INTO post (Title,Content,email) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $title, $content,$email);
 
     if ($stmt->execute()) {
         header("Location:index.php?title=" . $title . "&cdate=" . $cdate . "");
@@ -63,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 }
 
-
 // Check if a delete request is made
 if(isset($_GET['delid'])){
     $delid = $_GET['delid'];
@@ -72,9 +71,9 @@ if(isset($_GET['delid'])){
     $conn = new mysqli($servername, $username, $password, $dbname);
     $sql = "DELETE FROM post WHERE PostId = $delid";
     if($conn->query($sql) === TRUE){
-        header("Location:index.php?title=" . $title . "&cdate=" . $cdate . "&deleted");
+        header("Location: index.php?title=" . $title . "&cdate=" . $cdate . "");
         exit();
-    };
+    }
 
     $conn->close();
 }

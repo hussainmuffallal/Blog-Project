@@ -28,10 +28,12 @@
             width: 20%; /* Adjust the width as needed */
             margin: 32px; /* Adjust the margin as needed */
             transition: all 0.5s;   
+            border-radius: 25px;
+            border: #ccc 1px solid;
         }
 
         .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            box-shadow: 0 8px 16px 0 rgba(19, 2, 250,0.2);
             transform: scale(1.02);
             cursor: pointer;
         }
