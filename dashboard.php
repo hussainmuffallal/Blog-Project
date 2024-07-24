@@ -38,6 +38,8 @@
             margin: 10px; /* Adjust the margin as needed */
             border-radius: 25px;
             border: 1px solid #ccc;
+            background-color: cornsilk;
+            transition: all 0.5s;
         }
 
         .card-body {
@@ -47,6 +49,12 @@
         .card-title {
             font-weight: bold;
             font-size: 1.5rem;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(19, 2, 250,0.2);
+            transform: scale(1.02);
+            cursor: pointer;
         }
         
     </style>
@@ -76,7 +84,68 @@
         </div>
       </nav>
       
-      
+      <div class="container-md text-center mt-5" style="max-width: 700px;">
+        <div class="mb-4 hero-text">My Blogs</div>
+        <div class="card-container">
+
+
+
+                <?php
+                // Connect to the MySQL database
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "blog_project";
+                $email=$_SESSION['userloggedin'];
+
+                $conn = new mysqli($servername, $username, $password, $dbname);
+
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                //Check if a search request is made
+                if(isset($_GET['search'])){
+                    $search=$_GET['search'];
+                    if($search==''){
+                        //All the records
+                        $sql = "SELECT PostId,CreatedDate,Title,Content FROM post WHERE email = '$email' ORDER BY CreatedDate DESC";
+                   }
+                    $sql = "SELECT PostId,CreatedDate,Title,Content FROM post WHERE email = '$email' AND Title LIKE '%$search%' ORDER BY CreatedDate DESC";
+                }else{
+                    // SQL query to select the desired columns from the "post" table
+                    $sql = "SELECT PostId,CreatedDate,Title,Content FROM post WHERE email = '$email' ORDER BY CreatedDate ASC";
+                }
+
+                // Execute the query
+                $result = $conn->query($sql);
+
+                // Check if the query was successful
+                if ($result) {
+                    // Fetch the rows
+                    while ($row = $result->fetch_assoc()) {
+                        $lname=$row["Title"];
+                        $cdate=$row["CreatedDate"];
+                        // Display the data in table rows
+                        echo "<a href='viewBlog.php?Title=" . urlencode($lname) . "&cdate=" . urlencode($cdate) . "'><div class='card'>";
+                        echo "<h2 class='text-decoration: none'>" . $row["Title"] . "</h2>";
+                        echo "<p>" . $row["Content"] . "</p>";
+                        echo "<p>" . $row["CreatedDate"] . "</p>";
+                        echo "<a class='btn mb-3 btn-outline-danger' href='dbposts.php?delid=" . $row["PostId"] . "&title=" . urlencode($lname) . "&cdate=" . urlencode($cdate) . "'>Delete</a>";                        echo "</div></a>";
+                    }
+                    
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+
+                // Close the connection
+                $conn->close();
+                ?>
+            </tbody>
+        </table>  
+      </div>
+
 
     </div>
 
