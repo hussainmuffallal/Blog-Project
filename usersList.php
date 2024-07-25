@@ -132,7 +132,7 @@
             });
 
             // Build the URL with the data
-            const url = `usersBlog.php?Title=${encodeURIComponent(data[1])}&cdate=${encodeURIComponent(data[0])}`;
+            const url = `usersBlog.php?email=${encodeURIComponent(data[2])}&Title=${encodeURIComponent(data[1])}&cdate=${encodeURIComponent(data[0])}`;
 
             // Navigate to the URL
             window.location.href = url;

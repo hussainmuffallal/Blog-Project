@@ -24,8 +24,9 @@
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the form data
     $description = $_POST['description'];
-    $postid = $_POST['postid'];
     $email=$_SESSION['userloggedin'];
+    $postid = $_POST['postid'];
+    
 
 
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -35,22 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Check if the title already exists in the database
-    $check_query = "SELECT Description FROM comment WHERE Description = '$description'";
-    $check_result = $conn->query($check_query);
-
-    if ($check_result->num_rows > 0) {
-        // Title already exists
-        header("Location: index.php?error=comment_exists");
-        exit();
-    } else {
+    {
 
     // Prepare and execute the SQL statement
     $stmt = $conn->prepare("INSERT INTO comment (Description,PostId,email) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $description,$postid,$email);
 
     if ($stmt->execute()) {
-        header("Location: index.php?inserted");
+        header("Location:viewBlog.php?title=" . urlencode($title) . "&cdate=" . urlencode($cdate)) . "&postid=" . urlencode($postid);
         exit();
     } else {
         echo "Error: " . $stmt->error;
@@ -60,6 +53,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 }
+// Check if the form is being submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the session is started
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    // Check if the user is logged in
+    if (!isset($_SESSION['userloggedin'])) {
+        header('Location: login.php');
+        exit();
+    }
+
+    
+}
+
 }
 
 // Check if a delete request is made

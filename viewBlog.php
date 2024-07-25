@@ -110,10 +110,13 @@
                 $conn->close();
                 ?>
 
-        <div class="mb-2 fw-bold">Leave a Comment</div>
+
+            <div class="mb-2 fw-bold">Leave a Comment</div>
             <form action="dbcomments.php" method="POST" class="row g-3">
                 <div class="col-10">
-                    <input type="textarea" class="form-control" id="description" name="description" placeholder="Type your comment here" required></input>
+                    <input type="hidden" name="postid" value="<?php echo $postid; ?>">
+                    <input type="hidden" name="fname" value="<?php echo $firstName; ?>">
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Type your comment here" required></input>
                 </div>
                 <div class="col-3">
                     <button type="submit" class="btn btn-success">Comment</button>
@@ -121,28 +124,16 @@
             </form>
 
             <div class="container-md text-center mt-5" style="max-width: 700px;">
-            <div class="mb-4 hero-text">Comments</div>
+            <div class="mb-4 fw-bold">Comments</div>
             <div class="card-container">
 
 
             <?php
-            session_start(); // Start the session
-
-            // Check if the user is logged in
-            if (!isset($_SESSION['userloggedin'])) {
-                header('Location: login.php');
-                exit();
-            }
-                // Retrieve the user's first name from the session
-                $firstName = $_SESSION['userloggedin'];
-
-
                 // Connect to the MySQL database
                 $servername = "localhost";
                 $username = "root";
                 $password = "";
                 $dbname = "blog_project";
-                $email=$_SESSION['userloggedin'];
 
                 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -161,8 +152,58 @@
                     $sql = "SELECT CommentId,PostId,CreatedDate,Description FROM comment WHERE email = '$email' AND Description LIKE '%$search%' ORDER BY CreatedDate DESC";
                 }else{
                     // SQL query to select the desired columns from the "post" table
-                    $sql = "SELECT CommentId, PostId, CreatedDate, Description FROM comment WHERE email = '$email' ORDER BY CreatedDate ASC";
+                    $sql = "SELECT CommentId, PostId, CreatedDate, Description FROM comment WHERE email = '$email' ORDER BY CreatedDate DESC";
                 }
+
+                // Check if the user is logged in
+if (isset($_SESSION['userloggedin'])) {
+    // User is logged in
+    // Query the database to retrieve the user's firstname
+    $userEmail = $_SESSION['email']; // Replace with the appropriate method to get the user's email
+    $query = "SELECT firstname FROM users WHERE email = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $userEmail);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if a row was returned
+    if ($result->num_rows > 0) {
+        // Fetch the firstname from the result
+        $row = $result->fetch_assoc();
+        $firstname = $row['firstname'];
+
+        // Display the user's firstname on top of the page
+        echo '<h1>Welcome, ' . $firstname . '</h1>';
+    } else {
+        echo "No user found with the provided email.";
+    }
+} else {
+    // User is not logged in
+    // Display the comments without the comment form
+    // Query the database to retrieve the comments
+    $query = "SELECT * FROM comment WHERE PostId = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $postId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if any comments were found
+    if ($result->num_rows > 0) {
+        // Display the comments
+        while ($row = $result->fetch_assoc()) {
+            echo '<div class="comment">';
+            echo '<h3>' . $row['name'] . '</h3>';
+            echo '<p>' . $row['comment'] . '</p>';
+            echo '</div>';
+        }
+    } else {
+        echo "No comments found.";
+    }
+}
+
+// Close the statement and connection
+$stmt->close();
+
 
                 // Execute the query
                 $result = $conn->query($sql);
@@ -173,19 +214,10 @@
                     while ($row = $result->fetch_assoc()) {
                         $lname = $row["Description"];
                         $cdate = date("Y-m-d", strtotime($row["CreatedDate"])); // Extract date portion from CreatedDate
-                        $postId = $row["PostId"];
-                        
-                        // Retrieve the user's first name from the email
-                        $sql2 = "SELECT FirstName FROM user WHERE email = '$email'";
-                        $result2 = $conn->query($sql2);
-
-                        if ($result2 && $result2->num_rows > 0) {
-                            $userRow = $result2->fetch_assoc();
-                            $firstName = $userRow["FirstName"];
-                        }
+                        $postid = $row["PostId"];
 
                         // Display the data in table rows
-                        echo "<div class='card'><div class='card-body'><h5 class='card-title'>$firstName commented:</h5><p class='card-text'>$lname</p><p class='card-text'>$cdate</p></div></div>";
+                        echo "<div class='card'><div class='card-body'><h5 class='card-title'>$firstName commented:</h5><p class='card-text'>$lname</p><p class='card-text'>$cdate</p><p class='card-text'>$postid</p></div></div>";
                     }
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;

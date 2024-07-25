@@ -79,6 +79,7 @@
           $username = "root";
           $password = "";
           $dbname = "blog_project";
+          
 
           
           // Create connection
@@ -89,21 +90,50 @@
               die("Connection failed: " . $conn->connect_error);
           }
 
-          // Retrieve all posts from the database
-          $sql = "SELECT * FROM post WHERE Title = ORDER BY CreatedDate DESC";
-          $result = $conn->query($sql);
+          // Get the user's email from the request or session
+          $userEmail = $_GET['email']; // Replace with the appropriate method to get the user's email
 
+          // Query the database to retrieve the user's firstname
+          $query = "SELECT firstname FROM user WHERE email = ?";
+          $stmt = $conn->prepare($query);
+          $stmt->bind_param("s", $userEmail);
+          $stmt->execute();
+          $result = $stmt->get_result();
+
+          // Check if a row was returned
           if ($result->num_rows > 0) {
-              // Output data of each row
-              while($row = $result->fetch_assoc()) {
-                echo "<div class='card text-center '><a href='viewBlog.php?Title=" . $row['Title'] . "&PostId=" . $row['PostId'] . "'>";
-                echo "<h2>" . $row['Title'] . "</h2>";
-                echo "<p>" . $row['Content'] . "</p>";
-                echo "<p>Posted on " . date('Y-m-d', strtotime($row['CreatedDate'])) . "</p>";
-                echo "</a></div>";
-            }
+              // Fetch the firstname from the result
+              $row = $result->fetch_assoc();
+              $firstname = $row['firstname'];
+              
+              // Display the user's firstname on top of the page
+              echo '<h1> ' . $firstname . '\'s Posts</h1>';
+          }
+
+
+          // Get the user's email from the request or session
+          $userEmail = $_GET['email']; // Replace with the appropriate method to get the user's email
+
+          // Query the database to retrieve the user's posts
+          $query = "SELECT * FROM post WHERE email = ?";
+          $stmt = $conn->prepare($query);
+          $stmt->bind_param("s", $userEmail);
+          $stmt->execute();
+          $result = $stmt->get_result();
+
+          // Check if any posts were found
+          if ($result->num_rows > 0) {
+              // Display the posts
+              while ($row = $result->fetch_assoc()) {
+                echo '<div class="card">';
+                echo '<h2 class="card-title">' . $row['Title'] . '</h2>';
+                echo '<p class="card-content">' . $row['Content'] . '</p>';
+                echo '<p class="card-date">Posted on: ' . $row['CreatedDate'] . '</p>';
+                echo '</div>';
+              }
           } 
 
+    // Close the database connection    
           $conn->close();
           ?>
             </tbody>
