@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!isset($_SESSION['userloggedin'])) {
-        header('Location: ../login.php');
+        header('Location: login.php');
         exit();
     }
 ?>
@@ -14,9 +14,9 @@
     <title>Create a Post</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!--Favicons-->
-    <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon_io/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <style>
       body {
@@ -37,21 +37,21 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="../index.php"><img src="../img/favicon_io/favicon-32x32.png" alt="logo"></a>
+          <a class="navbar-brand" href="index.php"><img src="img/favicon_io/favicon-32x32.png" alt="logo"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link text-white" href="../blogs.php">Blogs</a>
+                <a class="nav-link text-white" href="blogs.php">Blogs</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" aria-current="page" href="../dashboard.php">Dashboard</a>
+                <a class="nav-link text-white" aria-current="page" href="dashboard.php">Dashboard</a>
               </li>
             </ul>
             
-            <a href="../logout.php" class="btn btn-outline-danger" >Logout <img src="../img/Logout24.png"></a>
+            <a href="logout.php" class="btn btn-outline-danger" >Logout <img src="img/Logout24.png"></a>
 
             </form>
           </div>

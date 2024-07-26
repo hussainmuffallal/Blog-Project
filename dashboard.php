@@ -77,7 +77,7 @@
               </li>
             </ul>
             
-              <a href="posts/index.php" class="btn btn-dark" >Create a Post</a>&nbsp;&nbsp;
+              <a href="createPost.php" class="btn btn-dark" >Create a Post</a>&nbsp;&nbsp;
               <a href="logout.php" class="btn btn-outline-danger" >Logout <img src="img/Logout24.png"></a>
             
           </div>

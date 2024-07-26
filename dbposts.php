@@ -2,7 +2,7 @@
 <?php
     session_start();
     if(!isset($_SESSION['userloggedin'])) {
-        header('Location: ../login.php');
+        header('Location: login.php');
         exit();
     }
 ?>
@@ -45,7 +45,7 @@
 
     if ($result->num_rows > 0) {
         // Title already exists
-        header("Location: index.php?error=title_exists");
+        header("Location: createPost.php?error=title_exists");
         exit();
     } else {
 
@@ -56,7 +56,7 @@
     $stmt->execute();
 
         // Redirect the user to the dashboard page
-        header("Location: ../dashboard.php");
+        header("Location: dashboard.php");
         exit;
     }{
 
@@ -74,7 +74,7 @@ if(isset($_GET['delid'])){
     $conn = new mysqli($servername, $username, $password, $dbname);
     $sql = "DELETE FROM post WHERE PostId = $delid";
     if($conn->query($sql) === TRUE){
-        header("Location: index.php?title=" . $title . "&cdate=" . $cdate . "");
+        header("Location: dashboard.php?title=" . $title . "&cdate=" . $cdate . "");
         exit();
     }
 
