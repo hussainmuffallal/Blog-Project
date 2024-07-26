@@ -20,15 +20,6 @@
     $dbname = "blog_project";
 
 
-// Check if the form has been submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the form data
-    $title = $_POST['title'];
-    $cdate = $_GET['cdate'];
-    $content = $_POST['content'];
-    $email=$_SESSION['userloggedin'];
-
-
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     // Check connection
@@ -36,30 +27,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Check if the title already exists in the database
-    $check_query = "SELECT Title FROM post WHERE Title = '$title'";
-    $check_result = $conn->query($check_query);
+    // Check if the form has been submitted
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Get the form data
+        $title = $_POST['title'];
+        $cdate = $_GET['cdate'];
+        $content = $_POST['content'];
+        $email=$_SESSION['userloggedin'];
 
-    if ($check_result->num_rows > 0) {
+    // Check if the title is already used by the user
+        $query = "SELECT * FROM post WHERE title = ? AND email = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ss", $title, $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+
+    if ($result->num_rows > 0) {
         // Title already exists
         header("Location: index.php?error=title_exists");
         exit();
     } else {
 
     // Prepare and execute the SQL statement
-    $stmt = $conn->prepare("INSERT INTO post (Title,Content,email) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $title, $content,$email);
+    $query = "INSERT INTO post (title, content, email) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("sss", $title, $content, $email);
+    $stmt->execute();
 
-    if ($stmt->execute()) {
-        header("Location:index.php?title=" . $title . "&cdate=" . $cdate . "");
-        exit();
-    } else {
-        echo "Error: " . $stmt->error;
-    }
+        // Redirect the user to the dashboard page
+        header("Location: ../dashboard.php");
+        exit;
+    }{
 
     // Close the statement and connection
     $stmt->close();
-    $conn->close();
+    
 }
 }
 

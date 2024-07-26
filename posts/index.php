@@ -72,6 +72,17 @@
             </div>
         </form>
 
+        <?php
+
+        if(isset($_GET['error'])) {
+          echo('
+            <div id="alertbox" class="alert alert-danger mt-3" role="alert">
+              This title already exists
+          </div>');
+        }
+
+        ?>
+
         <div class="container-md text-center mt-5" style="max-width: 700px;">
         <div class="mb-4 hero-text">My Blogs</div>
         <div class="card-container">
@@ -120,7 +131,8 @@
                         echo "<h2>" . $row["Title"] . "</h2>";
                         echo "<p>" . $row["Content"] . "</p>";
                         echo "<p>" . $row["CreatedDate"] . "</p>";
-                        echo "<a class='btn mb-3 btn-outline-danger' href='dbposts.php?delid=" . $row["PostId"] . "&title=" . urlencode($lname) . "&cdate=" . urlencode($cdate) . "'>Delete</a>";                        echo "</div></a>";
+                        echo "<a class='btn mb-3 btn-outline-danger' href='dbposts.php?delid=" . $row["PostId"] . "&title=" . urlencode($title) . "&cdate=" . urlencode($cdate) . "'>Delete</a>";
+                        echo "</div></a>";
                     }
                     
                 } else {
@@ -134,16 +146,6 @@
         </table>  
       </div>
 
-        <?php
-
-        if(isset($_GET['error'])) {
-          echo('
-            <div id="alertbox" class="alert alert-danger mt-3" role="alert">
-              This title already exists
-          </div>');
-        }
-
-        ?>
 
         <script>
           function hideAlertBox() {

@@ -128,11 +128,12 @@
                         $lname=$row["Title"];
                         $cdate=$row["CreatedDate"];
                         // Display the data in table rows
-                        echo "<a href='viewBlog.php?Title=" . urlencode($lname) . "&cdate=" . urlencode($cdate) . " &postid=" . urlencode($row["PostId"]) . "'><div class='card'>";
+                        echo "<a href='viewBlog.php?Title=" . urlencode($lname) . "&cdate=" . urlencode($cdate) . " &postid=" . urlencode($row["PostId"]) . " &email=" . urlencode($email) . "'><div class='card'>";
                         echo "<h2 class='text-decoration: none'>" . $row["Title"] . "</h2>";
                         echo "<p>" . $row["Content"] . "</p>";
                         echo "<p>" . $row["CreatedDate"] . "</p>";
-                        echo "<a class='btn mb-3 btn-outline-danger' href='dbposts.php?delid=" . $row["PostId"] . "&title=" . urlencode($lname) . "&cdate=" . urlencode($cdate) . "'>Delete</a>";                        echo "</div></a>";
+                        echo "<a class='btn mb-3 btn-outline-danger' href='dbposts.php?delid=" . $row["PostId"] . "&title=" . urlencode($lname) . "&cdate=" . urlencode($cdate) . "'>Delete</a>";
+                        echo "</div></a>";
                     }
                     
                 } else {

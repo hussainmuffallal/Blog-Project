@@ -142,6 +142,15 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
 
+                //Get the firstname from the request
+                $firstName = $_GET['fname'];
+
+                //Get the email from the request
+                $email = $_GET['email'];
+
+                // Get the post ID from the request
+                $postid = $_GET['postid'];
+
                 //Check if a search request is made
                 if(isset($_GET['search'])){
                     $search=$_GET['search'];
@@ -155,54 +164,7 @@
                     $sql = "SELECT CommentId, PostId, CreatedDate, Description FROM comment WHERE email = '$email' ORDER BY CreatedDate DESC";
                 }
 
-                // Check if the user is logged in
-if (isset($_SESSION['userloggedin'])) {
-    // User is logged in
-    // Query the database to retrieve the user's firstname
-    $userEmail = $_SESSION['email']; // Replace with the appropriate method to get the user's email
-    $query = "SELECT firstname FROM users WHERE email = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $userEmail);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    // Check if a row was returned
-    if ($result->num_rows > 0) {
-        // Fetch the firstname from the result
-        $row = $result->fetch_assoc();
-        $firstname = $row['firstname'];
-
-        // Display the user's firstname on top of the page
-        echo '<h1>Welcome, ' . $firstname . '</h1>';
-    } else {
-        echo "No user found with the provided email.";
-    }
-} else {
-    // User is not logged in
-    // Display the comments without the comment form
-    // Query the database to retrieve the comments
-    $query = "SELECT * FROM comment WHERE PostId = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $postId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    // Check if any comments were found
-    if ($result->num_rows > 0) {
-        // Display the comments
-        while ($row = $result->fetch_assoc()) {
-            echo '<div class="comment">';
-            echo '<h3>' . $row['name'] . '</h3>';
-            echo '<p>' . $row['comment'] . '</p>';
-            echo '</div>';
-        }
-    } else {
-        echo "No comments found.";
-    }
-}
-
-// Close the statement and connection
-$stmt->close();
+                
 
 
                 // Execute the query
