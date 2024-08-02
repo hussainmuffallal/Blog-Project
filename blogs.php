@@ -12,7 +12,7 @@
     <link rel="manifest" href="/site.webmanifest">
     <style>
       body {
-            background-color: #fcf9cd;  
+            background-color: #7474b3;  
       }
 
       .hero-text {
@@ -23,20 +23,38 @@
             font-weight: 100;
         }
 
-        .card {
-            display: inline-block;
-            width: 20%; /* Adjust the width as needed */
-            margin: 32px; /* Adjust the margin as needed */
-            transition: all 0.5s;   
-            border-radius: 25px;
-            border: #ccc 1px solid;
+        .card-container {
+          display: inline-block;
+          flex-wrap: wrap;
+          justify-content: left;
+          flex-direction: row;
         }
 
+        
+
+        .card {
+          width: 250px; /* Set the desired width for the cards */
+          height: 400px; /* Set the desired height for the cards */
+          margin-top: 60px;
+          margin-bottom: 10px;
+          margin-left: 55px;
+          margin-right: 10px;
+          border-radius: 25px;
+          align-items: center;
+          background-color: #ccc;
+          transition: all 0.5s;
+          
+        }
+
+
         .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(19, 2, 250,0.2);
-            transform: scale(1.02);
+            box-shadow: 0 8px 16px 0 rgba(255, 0, 0,0.2);
+            transform: scale(1.01);
             cursor: pointer;
         }
+
+        
+        
 
     </style>
 </head>
@@ -61,7 +79,8 @@
           </div>
         </div>
       </nav>
-    <center><h1>The Blogs</h1></center>
+      <div class="text-center hero-text text-white">The Blogs</div>
+      
 
           <?php
           // Connect to the MySQL database
@@ -86,13 +105,17 @@
           if ($result->num_rows > 0) {
               // Output data of each row
               while($row = $result->fetch_assoc()) {
-                echo "<div class='card text-center '><a href='viewBlog.php?Title=" . $row['Title'] . "&PostId=" . $row['PostId'] . "'>";
+                echo "<div class='card-container'>";
+                echo "<a href='viewBlog.php?PostId=" . $row['PostId'] . "'style='text-decoration: none; color: #333'><div class='card'>";
                 echo "<h2>" . $row['Title'] . "</h2>";
-                echo "<p>" . $row['Content'] . "</p>";
+                echo "<div class='content' style='overflow: hidden;'>";
+                echo "<p>" . substr($row["Content"], 0, 300) . "...<a href='viewBlog.php?PostId=" . $row['PostId'] . "'>Read More</a></p>";
+                echo "</div>";
                 echo "<p>Posted on " . date('Y-m-d', strtotime($row['CreatedDate'])) . "</p>";
-                echo "</a></div>";
-            }
-          } 
+                echo "</div></a>";
+                echo "</div>";
+              }
+            } 
 
           $conn->close();
           ?>

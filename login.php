@@ -12,8 +12,11 @@
     <link rel="manifest" href="/site.webmanifest">
     <style>
         body {
-            background-color: #fcf9cd;
+            background-image: url("img/loginbg.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
         }
+
       .hero-text {
             text-align: center;
             color: #333;
@@ -21,7 +24,7 @@
             margin-top: 5vh;
             font-weight: 50;
         }
-
+        
         
     </style>
 </head>

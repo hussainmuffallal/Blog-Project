@@ -11,16 +11,44 @@
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon_io/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <style>
-      body {
-            background-color: #fcf9cd;  
-      }
+        body {
+            background-color: #d9908b;  
+        }
 
-      .form-control {
+        .form-control {
             background-color: white;
             width: 50%;
             margin-left: 25%;
             margin-right: 25%;
-      }
+        }
+
+        .comment-button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10vh; /* Adjust this value as needed */
+        }
+
+        .comment-button {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .container {
+            border: #000 solid 2px;
+        }
+
+        .container-md {
+            border: #000 solid 2px;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            margin-left: 25%;
+            margin-right: 25%;
+            width: 50%;
+            text-align: center;
+        }
 
     </style>
     
@@ -56,7 +84,6 @@
                 $dbname = "blog_project";
                 
                 
-
                 $conn = new mysqli($servername, $username, $password, $dbname);
 
                 // Check connection
@@ -64,13 +91,15 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                // Get the value of $lname from the URL parameter
-                if(isset($_GET['Title'])){
-                    $lname = $_GET['Title'];
+                
+                // Get the value of $postid from the URL parameter
+                if(isset($_GET['PostId'])){
+                    $postid = $_GET['PostId'];
                 } else {
-                    $lname = '';
+                    $postid = '';
                 }
 
+          
                 //Check if a search request is made
                 if(isset($_GET['search'])){
                     $search = $_GET['search'];
@@ -83,7 +112,7 @@
                     }
                 } else {
                     // Default query (show all records)
-                    $sql = "SELECT PostId, Title, Content FROM post WHERE Title = '$lname' ORDER BY PostId DESC";
+                    $sql = "SELECT PostId, Title, Content FROM post WHERE PostId = '$postid' ORDER BY PostId DESC";
                 }
 
 
@@ -95,11 +124,11 @@
                     // Fetch the rows
                     while ($row = $result->fetch_assoc()) {
                         // Display the data in table rows
-                        
-                        echo '<li class="list-group-item fs-4 fw-light" style="text-align: center;">';
-                        echo '<h2 style="font-weight: bold;">' . $row['Title'] . '</h2>';
-                        echo '<p style="text-align: center;">' . $row['Content'] . '</p>';
-                        echo '</li>';
+                        echo "<div class='container-md text-center mt-5'>";
+                        echo "<h1>" . $row["CreatedDate"] . "</h1>";
+                        echo "<div class='mb-4 fw-bold'>" . $row["Title"] . "</div>";
+                        echo "<div class='content'>" . $row["Content"] . "</div>";
+                        echo "</div>";
                     }
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
@@ -110,20 +139,31 @@
                 $conn->close();
                 ?>
 
+            <!-- Posts End -->
 
-            <div class="mb-2 fw-bold">Leave a Comment</div>
-            <form action="dbcomments.php" method="POST" class="row g-3">
-                <div class="col-10">
-                    <input type="hidden" name="postid" value="<?php echo $postid; ?>">
-                    <input type="hidden" name="fname" value="<?php echo $firstName; ?>">
-                    <input type="text" class="form-control" id="description" name="description" placeholder="Type your comment here" required></input>
-                </div>
-                <div class="col-3">
-                    <button type="submit" class="btn btn-success">Comment</button>
-                </div>
-            </form>
 
-            <div class="container-md text-center mt-5" style="max-width: 700px;">
+            <!-- Comments -->
+
+            
+            <div class="container text-center mt-5 mb-3 fw-bold" style="max-width: 700px">Leave a comment
+                <form action="dbcomments.php" method="POST" class="align-items-center">
+                    
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Your Name" required></input>
+                    </div>
+                    <div class="">
+                        <input type="hidden" name="postid" value="<?php echo $postid; ?>">
+                        <input type="text" class="form-control" id="description" name="description" placeholder="Type your comment here" required></input>
+                    </div>
+                    <div class="comment-button-container">
+                        <button type="submit" class="comment-button btn btn-success">Comment</button>
+                    </div>
+                    
+                </form>
+            </div>
+            
+
+            <div class="container-md text-center mt-3" style="max-width: 700px;">
             <div class="mb-4 fw-bold">Comments</div>
             <div class="card-container">
 
@@ -142,15 +182,21 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                //Get the firstname from the request
-                $firstName = $_GET['fname'];
+                // Get the value of $postid from the URL parameter
+                if(isset($_GET['PostId'])){
+                    $postid = $_GET['PostId'];
+                } else {
+                    $postid = '';
+                }
 
-                //Get the email from the request
-                $email = $_GET['email'];
+                // Get the value of $email from the URL parameter
+                if(isset($_GET['Email'])){
+                    $email = $_GET['Email'];
+                } else {
+                    $email = '';
+                }
 
-                // Get the post ID from the request
-                $postid = $_GET['postid'];
-
+                
                 //Check if a search request is made
                 if(isset($_GET['search'])){
                     $search=$_GET['search'];
@@ -161,10 +207,8 @@
                     $sql = "SELECT CommentId,PostId,CreatedDate,Description FROM comment WHERE email = '$email' AND Description LIKE '%$search%' ORDER BY CreatedDate DESC";
                 }else{
                     // SQL query to select the desired columns from the "post" table
-                    $sql = "SELECT CommentId, PostId, CreatedDate, Description FROM comment WHERE email = '$email' ORDER BY CreatedDate DESC";
+                    $sql = "SELECT CommentId, PostId, CreatedDate, Description FROM comment WHERE PostId = '$postid' ORDER BY CreatedDate DESC";
                 }
-
-                
 
 
                 // Execute the query
@@ -179,7 +223,7 @@
                         $postid = $row["PostId"];
 
                         // Display the data in table rows
-                        echo "<div class='card'><div class='card-body'><h5 class='card-title'>$firstName commented:</h5><p class='card-text'>$lname</p><p class='card-text'>$cdate</p><p class='card-text'>$postid</p></div></div>";
+                        echo "<div class='card mb-5'><div class='card-body'><h5 class='card-title'>$email commented:</h5><p class='card-text'>$lname</p><p class='card-text'>$cdate</p></div></div>";
                     }
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;

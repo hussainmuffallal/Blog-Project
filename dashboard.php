@@ -21,7 +21,7 @@
     <style>
 
       body {
-            background-color: #fcf9cd;  
+            background-color: #2f9186;  
       }
 
       .hero-text {
@@ -32,30 +32,40 @@
             font-weight: 100;
         }
 
-        .card {
-            display: inline-block;
-            width: 30%; /* Adjust the width as needed */
-            margin: 10px; /* Adjust the margin as needed */
-            border-radius: 25px;
-            border: 1px solid #ccc;
-            background-color: cornsilk;
-            transition: all 0.5s;
+        .card-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
         }
 
-        .card-body {
-            text-align: center;
+        .card {
+          width: 300px; /* Set the desired width for the cards */
+          height: 400px; /* Set the desired height for the cards */
+          margin: 10px;
+          border-radius: 25px;
+          padding: 10px;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          background-color: #ccc;
+          transition: all 0.5s;
         }
-        
-        .card-title {
-            font-weight: bold;
-            font-size: 1.5rem;
+
+        .card p {
+          margin-bottom: 10px;
+          flex-grow: 1; /* Allow the paragraph to grow and fill the remaining space */
         }
 
         .card:hover {
             box-shadow: 0 8px 16px 0 rgba(19, 2, 250,0.2);
-            transform: scale(1.02);
+            transform: scale(1.01);
             cursor: pointer;
         }
+
+        
+
+        
         
     </style>
 </head>
@@ -84,8 +94,8 @@
         </div>
       </nav>
       
-      <div class="container-md text-center mt-5" style="max-width: 700px;">
-        <div class="mb-4 hero-text">My Blogs</div>
+      <div class="container-md text-center mt-5">
+        <div class="mb-4 hero-text text-white">My Blogs</div>
         <div class="card-container">
 
 
@@ -128,12 +138,16 @@
                         $lname=$row["Title"];
                         $cdate=$row["CreatedDate"];
                         // Display the data in table rows
-                        echo "<a href='viewBlog.php?Title=" . urlencode($lname) . "&cdate=" . urlencode($cdate) . " &postid=" . urlencode($row["PostId"]) . " &email=" . urlencode($email) . "'><div class='card'>";
-                        echo "<h2 class='text-decoration: none'>" . $row["Title"] . "</h2>";
-                        echo "<p>" . $row["Content"] . "</p>";
+                        echo "<div class='card-container'>";
+                        echo "<a href='viewBlog.php?Title=" . urlencode($lname) . "&cdate=" . urlencode($cdate) . " &postid=" . urlencode($row["PostId"]) . "' style='text-decoration: none; color: #333'><div class='card'>";
+                        echo "<h2>" . $row["Title"] . "</h2>";
+                        echo "<div class='content' style='overflow: hidden; height: 300px;'>";
+                        echo "<p>" . substr($row["Content"], 0, 300) . "... <a href='#' class='read-more'>Read More</a></p>";
+                        echo "</div>";
                         echo "<p>" . $row["CreatedDate"] . "</p>";
                         echo "<a class='btn mb-3 btn-outline-danger' href='dbposts.php?delid=" . $row["PostId"] . "&title=" . urlencode($lname) . "&cdate=" . urlencode($cdate) . "'>Delete</a>";
                         echo "</div></a>";
+                        echo "</div>";
                     }
                     
                 } else {

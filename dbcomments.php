@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'];
     $email=$_SESSION['userloggedin'];
     $postid = $_POST['postid'];
+    $commentid = $_GET['commentid'];
     
 
 
@@ -38,12 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     {
 
+
+    
     // Prepare and execute the SQL statement
     $stmt = $conn->prepare("INSERT INTO comment (Description,PostId,email) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $description,$postid,$email);
 
     if ($stmt->execute()) {
-        header("Location:viewBlog.php?title=" . urlencode($title) . "&cdate=" . urlencode($cdate)) . "&postid=" . urlencode($postid);
+        header("Location:viewBlog.php?PostId=$postid&Email=$email&CommentId=$commentid");
         exit();
     } else {
         echo "Error: " . $stmt->error;
@@ -65,11 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: login.php');
         exit();
     }
-
     
-}
-
-}
+}}
 
 // Check if a delete request is made
 if(isset($_GET['delid'])){

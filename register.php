@@ -12,7 +12,9 @@
     <link rel="manifest" href="/site.webmanifest">
     <style>
         body {
-            background-color: #fcf9cd;
+            background-image: url("img/2.png");
+            background-repeat: no-repeat;
+            background-size: cover;
         }
 
         .hero-text {
@@ -22,6 +24,12 @@
             margin-top: 5vh;
             font-weight: 50;
         }
+
+        .container-md {
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+        }
+
     </style>
 </head>
   <body>
@@ -47,11 +55,11 @@
       </nav>
       
       <div class="container-md text-center mt-5" style="max-width: 400px;">
-        <div class="mb-4 hero-text">Sign Up</div>
+        <div class="mb-4 hero-text text-white">Sign Up</div>
         <form action="dbregister.php" method="POST" onsubmit="return checkPasswordMatch()">
             <div class="mb-3 ">
                 <input type="email" class="form-control text-center fs-5 fw-light" id="exampleInputEmail1" onfocus="hideAlertBox()" aria-describedby="emailHelp" name="email" placeholder="Email address" required>
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <div id="emailHelp" class="form-text text-white">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
                 <input type="text" class="form-control text-center fs-5 fw-light" id="firstName" name="firstName" placeholder="First Name" required>
@@ -69,7 +77,7 @@
             <button type="submit" class="btn btn-primary fs-5 fw-light mb-2">Register</button><br>
             <button type="reset" class="btn2 btn-primary">Clear</button>
         </form>
-        <div class="text-center">
+        <div class="text-center text-white">
           Already have an account? <a href="login.php">Login</a>
         </div>
 
