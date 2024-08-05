@@ -29,7 +29,6 @@
             color: #000;
             font-size: 4rem;
             margin-top: 5vh;
-            margin-bottom: 2vh;
             font-weight: 100;
         }
 
@@ -86,7 +85,7 @@
       </nav>
       
       <div class="hero-text">Create a Post</div>
-      <div class="container">
+      <div class="container mt-5">
         <form action="dbposts.php" method="POST">
             <div class="mt-3 mb-3">
                 <input type="text" class="form-control" id="title" onfocus="hideAlertBox()" name="title" placeholder="Title" required/>
