@@ -24,6 +24,10 @@
             background-color: #fcf9cd;  
       }
 
+      .logo {
+            width: 100px;
+        }
+
       .hero-text {
             text-align: center;
             color: #333;
@@ -41,9 +45,9 @@
 </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.php"><img src="img/favicon_io/favicon-32x32.png" alt="logo"></a>
+          <a class="navbar-brand" href="index.php"><img src="img/blogicon.png" class="logo" alt="logo"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -88,7 +92,7 @@
                 }
 
                 // SQL query to select the desired columns from the "user" table
-                $sql = "SELECT FirstName, LastName, Email, Password, ConfirmPassword, AccountCreatedDate FROM user";
+                $sql = "SELECT FirstName, LastName, Email, Password, ConfirmPassword, AccountCreatedDate FROM user ORDER BY AccountCreatedDate ASC";
 
                 // Execute the query
                 $result = $conn->query($sql);

@@ -12,71 +12,172 @@
     <link rel="manifest" href="/site.webmanifest">
     <style>
         body {
-            background-color: white;
+            background-image: linear-gradient(45deg, #d3d1ff, #d1ffd9);  
+        }
+
+        .hero {
+            width: 100%;
+            min-height: 100vh;
+            padding: 10px 10%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .logo {
+            width: 100px;
+            
+        }
+
+        .content {
+            margin-top: 10%;
+            max-width: 600px;
+        }
+
+        .content h2 {
+            font-size: 70px;
+            color: #222;
+        }
+
+        .content p {
+            margin: 10px 0 30px;
+            color: #333;
+            animation-delay: 0.5s;
         }
 
         .cta {
             padding: .875rem 1.25rem;
-            background: #ff8000;
+            background-image: linear-gradient(45deg, #0303fc , #00ff1a );
             font-weight: 500;
             font-size: .8125rem;
             text-decoration: none;
             color: #fff;
             border-radius: 4px;
-            border: 1px solid #ff8000;
             font-family: "Roboto", sans-serif;
+            animation-delay: 1s;
         }
 
         .cta:hover {
             background: #000;
-            color: #ff8000;
+            color: #fff;
         }
 
-        .start-card {
-            height: 400px; /* Set the desired height for the cards */
-            background-color: lightblue;
+        .feature-img {
+            width: 530px;
+            position: absolute;
+            bottom: 0;
+            right: 10%;
+        }
+
+        .feature-img.anim {
+            animation-delay: 0.7s;
+        }
+
+        .anim {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeIn .5s forwards;  
+        }
+
+        @keyframes fadeIn {
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .start-hero {
+            margin-top: 8%;
+            margin-bottom: 8%;
+            width: 100%;
+            min-height: 80vh;
+            padding: 10px 10%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .start-content {
+            margin-top: 25%;
+            max-width: 600px;
             
         }
 
+        .start-content h3 {
+            font-size: 30px;
+            color: #222;
+        }
+
+        .start-content p {
+            margin: 10px 0 30px;
+            color: #333;
+            animation-delay: 0.5s;
+        }
+
+       .start-img {  
+            width: 300px;
+            height: 400px;
+            position: absolute;
+            bottom: 0;
+            right: 10%;
+            border-radius: 15px;
+        }
+
         .card-container {
-          display: inline-block;
+          display: flex;
           flex-wrap: wrap;
           justify-content: center;
-          flex-direction: row;
         }
 
         .card {
-          width: 250px; /* Set the desired width for the cards */
-          height: 400px; /* Set the desired height for the cards */
+          width: 300px; /* Set the desired width for the cards */
+          height: 500px; /* Set the desired height for the cards */
           margin-top: 60px;
-          margin-bottom: 10px;
-          margin-left: 55px;
+          margin-left: 15px;
           margin-right: 10px;
-          border-radius: 25px;
+          padding: 20px;
+          border-radius: 15px;
           align-items: center;
-          background-color: #fab6cd;
+          background-color: white;
           transition: all 0.5s;
           
         }
 
+        .card p {
+          margin-bottom: 10px;
+          flex-grow: 1; /* Allow the paragraph to grow and fill the remaining space */
+        }
+
         .card:hover {
             transform: scale(1.01);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            box-shadow: 0 0 20px rgba(0, 0, 255, 0.5);
             cursor: pointer;
 
         }
 
-        .middle-card {
-            height: 400px; /* Set the desired height for the cards */
-            background-color: #eab0f7;
+        .end-hero {
+            margin-top: 5%;
+            margin-bottom: 5%;
+            width: 100%;
+            min-height: 80vh;
+            padding: 10px 10%;
+            overflow: hidden;
+            position: relative;
         }
 
-        .end-card {
-            height: 400px; /* Set the desired height for the cards */
-            background-color: lightgreen;
+        .end-content {
+            margin-top: 25%;
+            max-width: 600px;
+            
         }
 
-        
+        .end-img {
+            width: 500px;
+            height: 400px;
+            position: absolute;
+            bottom: 0;
+            right: 10%;
+            border-radius: 15px;
+        }
+
         .ul {
             list-style-type: none;
             margin: 0;
@@ -84,8 +185,29 @@
             overflow: hidden;
             background-color: #333;
             position: fixed;
+            bottom: 0;
             top: 0;
             width: 100%;
+        }
+
+        .links {
+          list-style: none;
+          margin: 20px;
+          padding: 0;
+          display: column;
+        }
+
+        .links li {
+          margin-right: 0%;
+        }
+
+        .links a {
+          color: #fff;
+          text-decoration: none;
+        }
+
+        .links a:hover {
+          color: #0390fc;
         }
 
         .social-icons {
@@ -109,30 +231,6 @@
             font-size: 24px;
         }
 
-        .links {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          display: column;
-        }
-
-        .links li {
-          margin-right: 20px;
-        }
-
-        .links li:last-child {
-          margin-right: 0;
-        }
-
-        .links a {
-          color: #fff;
-          text-decoration: none;
-        }
-
-        .links a:hover {
-          color: #ff8000;
-        }
-
         footer {
             background-color: #333;
             color: #fff;
@@ -146,88 +244,104 @@
     </style>
 </head>
   <body>
+      
     
-    <nav class="navbar navbar-expand-lg bg-light">
+  <div class="hero">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.php"><img src="img/favicon_io/favicon-32x32.png" alt="logo"></a>
+          <a class="navbar-brand" href="index.php"><img src="img/blogicon.png" class="logo" alt="logo"></a>
           <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-underline ">
               <li class="nav-item">
                 <a class="nav-link text-black" href="blogs.php">Blogs</a>
               </li>
-            </ul>
+              <li class="nav-item">
+                <a class="nav-link text-black" href="dashboard.php">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-black" href="blogs.php">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-black" href="blogs.php">Contact Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-black" href="blogs.php">Services</a>
+              </li>&nbsp;
+            </ul> 
               <a class="btn btn-outline-success text-black" href="login.php">Login</a>
-
-            </form>
           </div>
         </div>
       </nav>
+      <div class="content">
+        <h2 class="anim">Publish your passions,<br> your way</h2>
+        <p class="anim">Start creating your own blog with us and share your ideas.<br>
+        Take it to the global community with us.</p>
+        <a class="cta ga-hero-cta anim" href="register.php">CREATE YOUR BLOG</a>
+      </div>
+      <img src="img/indexbg1.jpg" class="feature-img anim">
+    </div>
+     
 
-
-    <div class="fs-1 text-center mt-5 text-black">Publish your passions, your way</div>
-
-
-    <div class="text-center mt-5">
-    <a class="cta ga-hero-cta" href="register.php">CREATE YOUR BLOG</a>
+    <div class="start-hero">
+      <div class="start-content">
+        <h3 class="anim">Choose the perfect design</h3>
+        <p class="anim">Create what you want and design what you need for your blog</p>
+      </div>
+        <img src="img/img1.png" class="start-img anim">
     </div>
 
-    <div class="start-card fs-3 text-left mt-5  text-black">
-      &nbsp;&nbsp;&nbsp;&nbsp;Choose the perfect design
-      <div class="fs-4 text-left mt-5 text-black">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create what you want and design what you need for your blog
+
+    <div class="fs-2 fw-bold text-center">OUR BLOGS</div>
+      <div class="card-container">
+        <?php
+          // Connect to the MySQL database
+          $servername = "localhost";
+          $username = "root";
+          $password = "";
+          $dbname = "blog_project";
+
+          $conn = new mysqli($servername, $username, $password, $dbname);
+
+          // Check connection
+          if ($conn->connect_error) {
+              die("Connection failed: " . $conn->connect_error);
+          }
+
+          // Retrieve the last four blogs from the database
+          $sql = "SELECT * FROM post ORDER BY CreatedDate DESC LIMIT 4";
+          $result = $conn->query($sql);
+
+          if ($result->num_rows > 0) {
+              // Output data of each row
+              while($row = $result->fetch_assoc()) {
+                echo "<div class='card-container'>";
+                echo "<a href='viewBlog.php?PostId=" . $row['PostId'] . "'style='text-decoration: none; color: #333'><div class='card'>";
+                echo "<h2>" . $row['Title'] . "</h2>";
+                echo "<div class='content' style='overflow: hidden;'>";
+                echo "<p>" . substr($row["Content"], 0, 300) . "...<a href='viewBlog.php?PostId=" . $row['PostId'] . "'>Read More</a></p>";
+                echo "</div>";
+                echo "<p>Posted on " . date('Y-m-d', strtotime($row['CreatedDate'])) . "</p>";
+                echo "</div></a>";
+                echo "</div>";
+              }
+              echo "</div>";
+          } else {
+              echo "No blogs found.";
+          }
+
+          $conn->close();
+        ?>
       </div>
     </div>
 
-
-
-    <?php
-      // Connect to the MySQL database
-      $servername = "localhost";
-      $username = "root";
-      $password = "";
-      $dbname = "blog_project";
-
-      $conn = new mysqli($servername, $username, $password, $dbname);
-
-      // Check connection
-      if ($conn->connect_error) {
-          die("Connection failed: " . $conn->connect_error);
-      }
-
-      // Retrieve the last four blogs from the database
-      $sql = "SELECT * FROM post ORDER BY CreatedDate DESC LIMIT 4";
-      $result = $conn->query($sql);
-
-      if ($result->num_rows > 0) {
-          // Output data of each row
-          while($row = $result->fetch_assoc()) {
-            echo "<div class='card-container'>";
-            echo "<a href='viewBlog.php?PostId=" . $row['PostId'] . "'style='text-decoration: none; color: #333'><div class='card'>";
-            echo "<h2>" . $row['Title'] . "</h2>";
-            echo "<div class='content' style='overflow: hidden;'>";
-            echo "<p>" . substr($row["Content"], 0, 300) . "...<a href='viewBlog.php?PostId=" . $row['PostId'] . "'>Read More</a></p>";
-            echo "</div>";
-            echo "<p>Posted on " . date('Y-m-d', strtotime($row['CreatedDate'])) . "</p>";
-            echo "</div></a>";
-            echo "</div>";
-          }
-          echo "</div>";
-      } else {
-          echo "No blogs found.";
-      }
-
-      $conn->close();
-    ?>
-
-    <div class="middle-card fs-3 text-center mt-5 mb-5 text-black">
-      Know your audience
-    </div>
-
-    <div class="end-card fs-3 text-center mt-5 mb-5 text-black">
-      Join million of others  <img src="img/cardimg4.jpg" alt="image" style="width: 500px; height: 400px;">
+    <div class="end-hero">
+      <div class="end-content">
+        <h3>Join millions of others</h3>
+      </div>
+      <img src="img/cardimg4.jpg" class="end-img" alt="image">
     </div>
 
     <div class="mt-5 fs-3 fw-bold text-center mb-5 ">

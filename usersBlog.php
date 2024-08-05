@@ -32,10 +32,15 @@
             font-weight: 100;
         }
 
+        .logo {
+            width: 100px;
+        }
+
         .card {
-            display: inline-block;
+            border-radius: 15px;
             width: 30%; /* Adjust the width as needed */
             margin: 10px; /* Adjust the margin as needed */
+            transition: all 0.5s;
         }
 
         .card-body {
@@ -46,14 +51,20 @@
             font-weight: bold;
             font-size: 1.5rem;
         }
+
+        .card:hover {
+            box-shadow: 0 0px 20px 0 rgba(0, 0, 255,0.2);
+            transform: scale(1.01);
+            cursor: pointer;
+        }
         
     </style>
 </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.php"><img src="img/favicon_io/favicon-32x32.png" alt="logo"></a>
+          <a class="navbar-brand" href="index.php"><img src="img/blogicon.png" class="logo" alt="logo"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -121,16 +132,20 @@
           $stmt->execute();
           $result = $stmt->get_result();
 
+          
+
           // Check if any posts were found
           if ($result->num_rows > 0) {
               // Display the posts
               while ($row = $result->fetch_assoc()) {
-                echo '<div class="card">';
+                echo '<div class="card"><a href="viewBlog.php?PostId=' . urlencode($row["PostId"]) . '" style="text-decoration: none; color: #333">';
                 echo '<h2 class="card-title">' . $row['Title'] . '</h2>';
                 echo '<p class="card-content">' . $row['Content'] . '</p>';
                 echo '<p class="card-date">Posted on: ' . $row['CreatedDate'] . '</p>';
-                echo '</div>';
+                echo '</div></a>';
               }
+          } else {
+              echo "<div class='fw-bold fs-3 mt-5'>This user has no posts yet.</div>";
           } 
 
     // Close the database connection    

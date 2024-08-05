@@ -20,34 +20,60 @@
     <link rel="manifest" href="/site.webmanifest">
     <style>
       body {
-            background-color: #fcf9cd;  
+            background-image: linear-gradient(45deg, #d3d1ff, #d1ffd9);  
       }
 
       .hero-text {
             text-align: center;
-            color: #333;
+            color: #000;
             font-size: 4rem;
             margin-top: 5vh;
+            margin-bottom: 2vh;
             font-weight: 100;
         }
 
+        .navbar {
+          padding: 10px 10%;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .logo {
+            width: 100px;
+        }
+
+        .btn {
+            margin-left: 20px;
+        }
+
+        .container {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
         
     </style>
 </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-dark">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.php"><img src="img/favicon_io/favicon-32x32.png" alt="logo"></a>
+          <a class="navbar-brand" href="index.php"><img src="img/blogicon.png" class="logo" alt="logo"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-underline">
               <li class="nav-item">
-                <a class="nav-link text-white" href="blogs.php">Blogs</a>
+                <a class="nav-link" href="blogs.php">Blogs</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" aria-current="page" href="dashboard.php">Dashboard</a>
+                <a class="nav-link" aria-current="page" href="dashboard.php">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="createPost.php">Create a Post</a>
               </li>
             </ul>
             
@@ -58,19 +84,20 @@
         </div>
       </nav>
       
-
-      <div class="mb-2 hero-text">Create a Post</div>
-        <form action="dbposts.php" method="POST" class="row g-3">
-            <div class="col-8">
+      <div class="hero-text">Create a Post</div>
+      <div class="container">
+        <form action="dbposts.php" method="POST">
+            <div class="mt-3 mb-3">
                 <input type="text" class="form-control" id="title" onfocus="hideAlertBox()" name="title" placeholder="Title" required/>
             </div>
-            <div class="col-10">
+            <div class="mb-3">
                 <input type="textarea" class="form-control" id="content" onfocus="hideAlertBox()" name="content" placeholder="Content" required></input>
             </div>
-            <div class="col-3">
+            <div>
                 <button type="submit" class="btn btn-success">Create</button>
             </div>
         </form>
+      </div>
 
         <?php
 

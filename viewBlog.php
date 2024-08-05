@@ -12,7 +12,11 @@
     <link rel="manifest" href="/site.webmanifest">
     <style>
         body {
-            background-color: #d9908b;  
+            background-color: gold;  
+        }
+
+        .logo {
+            width: 100px;
         }
 
         .form-control {
@@ -35,11 +39,19 @@
         }
 
         .container {
-            border: #000 solid 2px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            margin-left: 25%;
+            margin-right: 25%;
+            width: 50%;
+            text-align: center;
         }
 
         .container-md {
-            border: #000 solid 2px;
+            background-color: white;
             border-radius: 10px;
             padding: 20px;
             margin-top: 50px;
@@ -54,21 +66,21 @@
     
 </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-dark">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.php"><img src="img/favicon_io/favicon-32x32.png" alt="logo"></a>
+          <a class="navbar-brand" href="index.php"><img src="img/blogicon.png" class="logo" alt="logo"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link text-white active" href="blogs.php">Blogs</a>
+                <a class="nav-link" href="blogs.php">Blogs</a>
               </li>
             </ul>
             
-              <a class="btn btn-outline-primary text-white" href="register.php">Sign Up</a>&nbsp;&nbsp;
-              <a class="btn btn-outline-success text-white" href="login.php">Login</a>
+              <a class="btn btn-outline-primary" href="register.php">Sign Up</a>&nbsp;&nbsp;
+              <a class="btn btn-outline-success" href="login.php">Login</a>
 
             </form>
           </div>
@@ -99,6 +111,14 @@
                     $postid = '';
                 }
 
+                // Check if the 'CreatedDate' key exists in the array
+                if (isset($row['CreatedDate'])) {
+                    $cdate = date("Y-m-d", strtotime($row["CreatedDate"])); // Extract date portion from CreatedDate
+                } else {
+                    // Handle the case when the key is not present
+                    $cdate = ''; // Or any other appropriate default value
+                }
+
           
                 //Check if a search request is made
                 if(isset($_GET['search'])){
@@ -112,7 +132,7 @@
                     }
                 } else {
                     // Default query (show all records)
-                    $sql = "SELECT PostId, Title, Content FROM post WHERE PostId = '$postid' ORDER BY PostId DESC";
+                    $sql = "SELECT PostId, Title, Content, CreatedDate FROM post WHERE PostId = '$postid' ORDER BY PostId DESC";
                 }
 
 
@@ -125,7 +145,7 @@
                     while ($row = $result->fetch_assoc()) {
                         // Display the data in table rows
                         echo "<div class='container-md text-center mt-5'>";
-                        echo "<h1>" . $row["CreatedDate"] . "</h1>";
+                        echo "<div class='fw-bold'>" . date('Y-m-d', strtotime($row['CreatedDate'])) . "</div>";
                         echo "<div class='mb-4 fw-bold'>" . $row["Title"] . "</div>";
                         echo "<div class='content'>" . $row["Content"] . "</div>";
                         echo "</div>";
@@ -145,15 +165,12 @@
             <!-- Comments -->
 
             
-            <div class="container text-center mt-5 mb-3 fw-bold" style="max-width: 700px">Leave a comment
-                <form action="dbcomments.php" method="POST" class="align-items-center">
-                    
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Your Name" required></input>
-                    </div>
-                    <div class="">
+            <div class="container text-center mt-3 mb-5" style="max-width: 700px">Leave a comment
+                <form action="dbcomments.php" method="POST" class="align-items-center mt-3">
+                    <div>
                         <input type="hidden" name="postid" value="<?php echo $postid; ?>">
                         <input type="text" class="form-control" id="description" name="description" placeholder="Type your comment here" required></input>
+                        <div class="form-text">You have to be logged in to comment.</div>
                     </div>
                     <div class="comment-button-container">
                         <button type="submit" class="comment-button btn btn-success">Comment</button>
@@ -210,23 +227,31 @@
                     $sql = "SELECT CommentId, PostId, CreatedDate, Description FROM comment WHERE PostId = '$postid' ORDER BY CreatedDate DESC";
                 }
 
+                $sql = "SELECT c.CommentId, c.PostId, c.CreatedDate, c.Description, u.firstname 
+                FROM comment c 
+                JOIN user u ON c.email = u.email 
+                WHERE c.PostId = '$postid' 
+                ORDER BY c.CreatedDate DESC";
+
 
                 // Execute the query
                 $result = $conn->query($sql);
 
                 // Check if the query was successful
-                if ($result) {
+                if ($result->num_rows > 0) {
                     // Fetch the rows
-                    while ($row = $result->fetch_assoc()) {
-                        $lname = $row["Description"];
-                        $cdate = date("Y-m-d", strtotime($row["CreatedDate"])); // Extract date portion from CreatedDate
-                        $postid = $row["PostId"];
+                while ($row = $result->fetch_assoc()) {
+                    $lname = $row["Description"];
+                    $cdate = date("Y-m-d", strtotime($row["CreatedDate"])); // Extract date portion from CreatedDate
+                    $postid = $row["PostId"];
+                    $firstname = $row["firstname"]; // Get the firstname from the row
 
-                        // Display the data in table rows
-                        echo "<div class='card mb-5'><div class='card-body'><h5 class='card-title'>$email commented:</h5><p class='card-text'>$lname</p><p class='card-text'>$cdate</p></div></div>";
-                    }
+                    // Display the data in table rows
+                    echo "<div class='card mb-5'><div class='card-body'><h5 class='card-title'>$firstname commented:</h5><p class='card-text'>$lname</p><p class='card-text'>$cdate</p></div></div>";
+                }
+
                 } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
+                    echo "Be the first to comment on this post!";
                 }
 
                 // Close the connection

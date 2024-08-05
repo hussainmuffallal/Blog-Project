@@ -36,9 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
     {
-
 
     
     // Prepare and execute the SQL statement
@@ -46,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("sss", $description,$postid,$email);
 
     if ($stmt->execute()) {
-        header("Location:viewBlog.php?PostId=$postid&Email=$email&CommentId=$commentid");
+        header("Location:viewBlog.php?PostId=$postid&Email=$email&commentid=$commentid");
         exit();
     } else {
         echo "Error: " . $stmt->error;

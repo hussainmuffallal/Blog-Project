@@ -12,74 +12,96 @@
     <link rel="manifest" href="/site.webmanifest">
     <style>
       body {
-            background-color: #7474b3;  
+          background-image: linear-gradient(45deg, #d3d1ff, #d1ffd9);  
       }
 
       .hero-text {
-            text-align: center;
-            color: #333;
-            font-size: 4rem;
-            margin-top: 5vh;
-            font-weight: 100;
-        }
+          text-align: center;
+          color: #000;
+          font-size: 4rem;
+          margin-top: 5vh;
+          font-weight: 100;
+      }
 
-        .card-container {
-          display: inline-block;
+      .logo {
+          width: 100px;
+      }
+
+      .navbar {
+          padding: 10px 10%;
+          display: flex;
+          justify-content: space-between;
+      }
+
+      .btn {
+          margin-left: 20px;
+      }
+
+      .card-container {
+          display: flex;
           flex-wrap: wrap;
-          justify-content: left;
-          flex-direction: row;
-        }
+          justify-content: center;
+      }
 
-        
-
-        .card {
-          width: 250px; /* Set the desired width for the cards */
-          height: 400px; /* Set the desired height for the cards */
+      .card {
+          width: 300px; /* Set the desired width for the cards */
+          height: 500px; /* Set the desired height for the cards */
           margin-top: 60px;
           margin-bottom: 10px;
-          margin-left: 55px;
-          margin-right: 10px;
-          border-radius: 25px;
+          margin-left: 30px;
+          margin-right: 30px;
+          padding: 20px;
+          border-radius: 15px;
           align-items: center;
-          background-color: #ccc;
+          background-color: #fff;
           transition: all 0.5s;
-          
-        }
-
-
-        .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(255, 0, 0,0.2);
-            transform: scale(1.01);
-            cursor: pointer;
-        }
-
         
-        
+      }
+
+      .card p {
+          margin-bottom: 10px;
+          flex-grow: 1; /* Allow the paragraph to grow and fill the remaining space */
+      }
+
+
+      .card:hover {
+          box-shadow: 0 0px 20px 0 rgba(0, 0, 255,0.5);
+          transform: scale(1.01);
+          cursor: pointer;
+      }
 
     </style>
 </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="index.php"><img src="img/favicon_io/favicon-32x32.png" alt="logo"></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link text-white active" href="blogs.php">Blogs</a>
-              </li>
-            </ul>
-            
-              <a class="btn btn-outline-primary text-white" href="register.php">Sign Up</a>&nbsp;&nbsp;
-              <a class="btn btn-outline-success text-white" href="login.php">Login</a>
-
-            </form>
+      
+        <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="index.php"><img src="img/blogicon.png" class="logo" alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+              <ul class="navbar-nav nav-underline">
+                <li class="nav-item">
+                  <a class="nav-link active" href="blogs.php">Blogs</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="dashboard.php">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="createPost.php">Create a Post</a>
+                </li>
+              </ul>
+              <a class="btn btn-outline-primary" href="register.php">Sign Up</a>&nbsp;&nbsp;
+              <a class="btn btn-outline-success" href="login.php">Login</a>
+            </div>
+              
           </div>
-        </div>
-      </nav>
-      <div class="text-center hero-text text-white">The Blogs</div>
+        </nav>
+      
+      
+      <div class="text-center hero-text">The Blogs</div>
+        <div class="card-container">
       
 
           <?php
@@ -115,12 +137,14 @@
                 echo "</div></a>";
                 echo "</div>";
               }
+            } else {
+              echo "There are no posts available.Start creating some!";
             } 
 
           $conn->close();
           ?>
-
-
+        </div>
+      </div>
     
 
 
