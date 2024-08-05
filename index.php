@@ -86,7 +86,7 @@
         }
 
         .start-hero {
-            margin-top: 8%;
+            margin-top: 5%;
             margin-bottom: 8%;
             width: 100%;
             min-height: 80vh;
@@ -154,7 +154,6 @@
         }
 
         .end-hero {
-            margin-top: 5%;
             margin-bottom: 5%;
             width: 100%;
             min-height: 80vh;
@@ -195,10 +194,6 @@
           margin: 20px;
           padding: 0;
           display: column;
-        }
-
-        .links li {
-          margin-right: 0%;
         }
 
         .links a {
