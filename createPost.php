@@ -20,7 +20,8 @@
     <link rel="manifest" href="/site.webmanifest">
     <style>
       body {
-            background-image: linear-gradient(45deg, #d3d1ff, #d1ffd9);  
+            background-image: linear-gradient(45deg, #d3d1ff, #d1ffd9);
+            min-height: 100vh;
       }
 
       .hero-text {

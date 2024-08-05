@@ -21,21 +21,36 @@
     <style>
 
       body {
-            background-color: #fcf9cd;  
+            background-image: linear-gradient(45deg, #34e1eb, #34eba8);
+            min-height: 100vh;
       }
 
       .logo {
             width: 100px;
         }
 
+        .navbar {
+          padding: 10px 10%;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .btn {
+            margin-left: 20px;
+        }
+
       .hero-text {
             text-align: center;
-            color: #333;
+            color: #000;
             font-size: 4rem;
             margin-top: 5vh;
             font-weight: 100;
         }
 
+        .container {
+            padding: 4px 4%;
+        }
+        
         table tr:hover td {
             background-color: #f5f5f5;
             cursor: pointer;
@@ -51,14 +66,13 @@
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              
-              
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-underline">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="usersList.php">User Lists</a>
+              </li>
             </ul>
-            
               <a href="logout.php" class="btn btn-outline-danger" >Logout <img src="img/Logout24.png"></a>
-            
           </div>
         </div>
       </nav>

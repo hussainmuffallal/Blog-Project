@@ -24,8 +24,7 @@
         }
 
         .logo {
-            width: 100px;
-            
+            width: 100px;  
         }
 
         .content {
@@ -131,14 +130,14 @@
           width: 300px; /* Set the desired width for the cards */
           height: 500px; /* Set the desired height for the cards */
           margin-top: 60px;
-          margin-left: 15px;
-          margin-right: 10px;
+          margin-left: 25px;
+          margin-right: 20px;
           padding: 20px;
           border-radius: 15px;
           align-items: center;
           background-color: white;
           transition: all 0.5s;
-          
+          position: relative;
         }
 
         .card p {
@@ -151,6 +150,12 @@
             box-shadow: 0 0 20px rgba(0, 0, 255, 0.5);
             cursor: pointer;
 
+        }
+
+        .card-date {
+            position: absolute;
+            bottom: 30px;
+            color: #999;
         }
 
         .end-hero {
@@ -306,7 +311,7 @@
           }
 
           // Retrieve the last four blogs from the database
-          $sql = "SELECT * FROM post ORDER BY CreatedDate DESC LIMIT 4";
+          $sql = "SELECT * FROM post ORDER BY CreatedDate DESC LIMIT 3";
           $result = $conn->query($sql);
 
           if ($result->num_rows > 0) {
@@ -314,11 +319,11 @@
               while($row = $result->fetch_assoc()) {
                 echo "<div class='card-container'>";
                 echo "<a href='viewBlog.php?PostId=" . $row['PostId'] . "'style='text-decoration: none; color: #333'><div class='card'>";
-                echo "<h2>" . $row['Title'] . "</h2>";
+                echo "<h3>" . $row['Title'] . "</h3>";
                 echo "<div class='content' style='overflow: hidden;'>";
                 echo "<p>" . substr($row["Content"], 0, 300) . "...<a href='viewBlog.php?PostId=" . $row['PostId'] . "'>Read More</a></p>";
                 echo "</div>";
-                echo "<p>Posted on " . date('Y-m-d', strtotime($row['CreatedDate'])) . "</p>";
+                echo "<div class='card-date'>Posted on " . date('Y-m-d', strtotime($row['CreatedDate'])) . "</div>";
                 echo "</div></a>";
                 echo "</div>";
               }

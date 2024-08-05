@@ -12,11 +12,22 @@
     <link rel="manifest" href="/site.webmanifest">
     <style>
         body {
-            background-color: gold;  
+            background-image: linear-gradient(45deg, #d3d1ff, #d1ffd9);
+            min-height: 100vh;
         }
 
         .logo {
             width: 100px;
+        }
+
+        .navbar {
+          padding: 10px 10%;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .btn {
+            margin-left: 20px;
         }
 
         .form-control {
@@ -63,7 +74,6 @@
         }
 
     </style>
-    
 </head>
   <body>
     <nav class="navbar navbar-expand-lg">
@@ -72,10 +82,13 @@
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-underline">
               <li class="nav-item">
-                <a class="nav-link" href="blogs.php">Blogs</a>
+                <a class="nav-link" href="blogs.php">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard.php">Dashboard</a>
               </li>
             </ul>
             
@@ -87,8 +100,8 @@
         </div>
       </nav>
       
-
-      <?php
+        <div class="container-md">
+            <?php
                 // Connect to the MySQL database
                 $servername = "localhost";
                 $username = "root";
@@ -144,7 +157,7 @@
                     // Fetch the rows
                     while ($row = $result->fetch_assoc()) {
                         // Display the data in table rows
-                        echo "<div class='container-md text-center mt-5'>";
+                        echo "<div class='text-center mt-5'>";
                         echo "<div class='fw-bold'>" . date('Y-m-d', strtotime($row['CreatedDate'])) . "</div>";
                         echo "<div class='mb-4 fw-bold'>" . $row["Title"] . "</div>";
                         echo "<div class='content'>" . $row["Content"] . "</div>";
@@ -157,7 +170,8 @@
 
                 // Close the connection
                 $conn->close();
-                ?>
+            ?>
+        </div>
 
             <!-- Posts End -->
 
@@ -165,7 +179,7 @@
             <!-- Comments -->
 
             
-            <div class="container text-center mt-3 mb-5" style="max-width: 700px">Leave a comment
+            <div class="container text-center mt-3 mb-5">Leave a comment
                 <form action="dbcomments.php" method="POST" class="align-items-center mt-3">
                     <div>
                         <input type="hidden" name="postid" value="<?php echo $postid; ?>">
@@ -180,7 +194,7 @@
             </div>
             
 
-            <div class="container-md text-center mt-3" style="max-width: 700px;">
+            <div class="container-md text-center mt-3">
             <div class="mb-4 fw-bold">Comments</div>
             <div class="card-container">
 

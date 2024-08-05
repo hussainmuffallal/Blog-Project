@@ -12,46 +12,51 @@
     <link rel="manifest" href="/site.webmanifest">
     <style>
         body {
-            background-image: url("img/loginbg.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
+            background-image: linear-gradient(45deg, #8bd8fc, #b1ff8a);
+            min-height: 100vh;
         }
 
-      .hero-text {
+        .hero-text {
             text-align: center;
-            color: #333;
+            color: #000;
             font-size: 3rem;
             margin-top: 5vh;
             font-weight: 50;
         }
 
         .navbar {
-            backdrop-filter: blur(25px);
+            padding: 10px 10%;
+            display: flex;
+            justify-content: space-between;
         }
         
         .logo {
             width: 100px;
         }
         
+        .btn {
+            margin-left: 20px;
+        }
+        
     </style>
-</head>
+  </head>
   <body>
-    <nav class="navbar navbar-expand-lg">
+
+
+      <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
           <a class="navbar-brand" href="index.php"><img src="img/blogicon.png" class="logo" alt="logo"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-underline">
               <li class="nav-item">
-                <a class="nav-link text-white" href="blogs.php">Blogs</a>
+                <a class="nav-link" href="blogs.php">Blog</a>
               </li>
             </ul>
-            
-              <a class="btn btn-outline-primary text-white" href="register.php">Sign Up</a>&nbsp;&nbsp;
-              <a class="btn btn-outline-success text-white active" href="login.php">Login</a>
-
+              <a class="btn btn-outline-primary" href="register.php">Sign Up</a>
+              <a class="btn btn-outline-success active" href="login.php">Login</a>
             </form>
           </div>
         </div>
@@ -60,19 +65,18 @@
       <div class="container-md text-center mt-5" style="max-width: 400px;">
         <div class="mb-4 hero-text">Log In</div>
         <form action="dblogin.php" method="POST">
-            <div class="mb-3 mt-3">
-                <input type="email" name="email" class="form-control text-center fs-5 fw-light" id="exampleInputEmail1" onfocus="hideAlertBox()" aria-describedby="emailHelp" placeholder="Email address" required>
-            </div>
-            <div class="mb-3">
-                <input type="password" name="pass" class="form-control text-center fs-5 fw-light" id="password" onfocus="hideAlertBox()" placeholder="Password" required>
-            <div class="form-text">
-                <a href="#">Forgot Password?</a>
-            </div>
-            </div class="container">
-            <button type="submit" class="btn btn-primary fs-5 fw-light">Login</button>
-            
+          <div class="mb-3">
+              <input type="email" name="email" class="form-control text-center fs-5 fw-light" id="exampleInputEmail1" onfocus="hideAlertBox()" aria-describedby="emailHelp" placeholder="Email address" required>
+          </div>
+          <div class="mb-3">
+              <input type="password" name="pass" class="form-control text-center fs-5 fw-light" id="password" onfocus="hideAlertBox()" placeholder="Password" required>
+          <div class="mt-1 mb-3">
+              <a href="#">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary fs-5 fw-light">Login</button> 
         </form>
-        <div class="text-center mt-2">
+        <div class="text-center">
           Don't have an account? <a href="register.php">Register</a>
         </div>
 
@@ -102,6 +106,7 @@
           alertBox.style.display = "none";
         }
       </script>
+    
   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>

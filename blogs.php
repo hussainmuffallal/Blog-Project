@@ -12,7 +12,8 @@
     <link rel="manifest" href="/site.webmanifest">
     <style>
       body {
-          background-image: linear-gradient(45deg, #d3d1ff, #d1ffd9);  
+          background-image: linear-gradient(45deg, #d3d1ff, #d1ffd9);
+          min-height: 100vh; 
       }
 
       .hero-text {
@@ -55,7 +56,7 @@
           align-items: center;
           background-color: #fff;
           transition: all 0.5s;
-        
+          position: relative;
       }
 
       .card p {
@@ -70,6 +71,12 @@
           cursor: pointer;
       }
 
+      .card-date {
+            position: absolute;
+            bottom: 30px;
+            color: #999;
+        }
+
     </style>
 </head>
   <body>
@@ -83,7 +90,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
               <ul class="navbar-nav nav-underline">
                 <li class="nav-item">
-                  <a class="nav-link active" href="blogs.php">Blogs</a>
+                  <a class="nav-link active" href="blogs.php">Blog</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="dashboard.php">Dashboard</a>
@@ -129,11 +136,11 @@
               while($row = $result->fetch_assoc()) {
                 echo "<div class='card-container'>";
                 echo "<a href='viewBlog.php?PostId=" . $row['PostId'] . "'style='text-decoration: none; color: #333'><div class='card'>";
-                echo "<h2>" . $row['Title'] . "</h2>";
+                echo "<h3>" . $row['Title'] . "</h3>";
                 echo "<div class='content' style='overflow: hidden;'>";
                 echo "<p>" . substr($row["Content"], 0, 300) . "...<a href='viewBlog.php?PostId=" . $row['PostId'] . "'>Read More</a></p>";
                 echo "</div>";
-                echo "<p>Posted on " . date('Y-m-d', strtotime($row['CreatedDate'])) . "</p>";
+                echo "<div class='card-date'>Posted on " . date('Y-m-d', strtotime($row['CreatedDate'])) . "</div>";
                 echo "</div></a>";
                 echo "</div>";
               }

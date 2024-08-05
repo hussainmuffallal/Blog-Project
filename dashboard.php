@@ -21,7 +21,8 @@
     <style>
 
       body {
-            background-image: linear-gradient(45deg, #d3d1ff, #d1ffd9);  
+            background-image: linear-gradient(45deg, #d3d1ff, #d1ffd9); 
+            min-height: 100vh;
       }
 
       .hero-text {
@@ -64,7 +65,7 @@
           align-items: center;
           background-color: #fff;
           transition: all 0.5s;
-          
+          position: relative;
         }
 
         .card p {
@@ -76,6 +77,12 @@
             box-shadow: 0 0px 20px 0 rgba(0, 0, 255,0.5);
             transform: scale(1.01);
             cursor: pointer;
+        }
+
+        .card-date {
+            position: absolute;
+            bottom: 30px;
+            color: #999;
         }
  
         
@@ -154,11 +161,11 @@
                         // Display the data in table rows
                         echo "<div class='card-container'>";
                         echo "<a href='viewBlog.php?PostId=" . urlencode($row["PostId"]) . "' style='text-decoration: none; color: #333'><div class='card'>";
-                        echo "<h2>" . $row["Title"] . "</h2>";
+                        echo "<h3>" . $row["Title"] . "</h3>";
                         echo "<div class='content' style='overflow: hidden; height: 300px;'>";
                         echo "<p>" . substr($row["Content"], 0, 300) . "... <a href='viewBlog.php?PostId=" . urlencode($row["PostId"]) . "' class='read-more'>Read More</a></p>";
                         echo "</div>";
-                        echo "<p>" . $row["CreatedDate"] . "</p>";
+                        echo "<div class='card-date'>" . $row["CreatedDate"] . "</div>";
                         echo "<a class='btn mb-3 btn-outline-danger' href='dbposts.php?delid=" . $row["PostId"] . "&title=" . urlencode($lname) . "&cdate=" . urlencode($cdate) . "'>Delete</a>";
                         echo "</div></a>";
                         echo "</div>";

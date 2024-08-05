@@ -12,63 +12,62 @@
     <link rel="manifest" href="/site.webmanifest">
     <style>
         body {
-            background-image: url("img/2.png");
-            background-repeat: no-repeat;
-            background-size: cover;
+            background-image: linear-gradient(45deg, #8bd8fc, #b1ff8a);
+            min-height: 100vh;
         }
 
         .hero-text {
             text-align: center;
-            color: #333;
+            color: #000;
             font-size: 3rem;
             margin-top: 5vh;
             font-weight: 50;
         }
 
         .navbar {
-            backdrop-filter: blur(25px);
+          padding: 10px 10%;
+          display: flex;
+          justify-content: space-between;
         }
 
         .logo {
             width: 100px;
         }
 
-        .container-md {
-            backdrop-filter: blur(25px);
-            border-radius: 25px;
-            margin-bottom: 5%;
+        .btn {
+            margin-left: 20px;
         }
 
     </style>
 </head>
   <body>
+
+
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
           <a class="navbar-brand" href="index.php"><img src="img/blogicon.png" class="logo" alt="logo"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-underline">
               <li class="nav-item">
-                <a class="nav-link text-white" href="blogs.php">Blogs</a>
+                <a class="nav-link" href="blogs.php">Blog</a>
               </li>
             </ul>
-            
-              <a class="btn btn-outline-primary text-white active" href="register.php">Sign Up</a>&nbsp;&nbsp;
-              <a class="btn btn-outline-success text-white" href="login.php">Login</a>
-
+              <a class="btn btn-outline-primary active" href="register.php">Sign Up</a>
+              <a class="btn btn-outline-success" href="login.php">Login</a>
             </form>
           </div>
         </div>
       </nav>
       
       <div class="container-md text-center mt-5" style="max-width: 400px;">
-        <div class="mb-4 hero-text text-white">Sign Up</div>
+        <div class="mb-4 hero-text">Sign Up</div>
         <form action="dbregister.php" method="POST" onsubmit="return checkPasswordMatch()">
-            <div class="mb-3 ">
+            <div class="mb-3">
                 <input type="email" class="form-control text-center fs-5 fw-light" id="exampleInputEmail1" onfocus="hideAlertBox()" aria-describedby="emailHelp" name="email" placeholder="Email address" required>
-                <div id="emailHelp" class="form-text text-white">We'll never share your email with anyone else.</div>
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
                 <input type="text" class="form-control text-center fs-5 fw-light" id="firstName" name="firstName" placeholder="First Name" required>
@@ -86,7 +85,7 @@
             <button type="submit" class="btn btn-primary fs-5 fw-light mb-2">Register</button><br>
             <button type="reset" class="btn2 btn-primary">Clear</button>
         </form>
-        <div class="text-center text-white">
+        <div class="text-center">
           Already have an account? <a href="login.php">Login</a>
         </div>
 
@@ -110,8 +109,6 @@
         
       </div>
 
-      
-      
 
       <script>
         function hideAlertBox() {
