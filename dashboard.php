@@ -73,7 +73,7 @@
         }
 
         .card:hover {
-            box-shadow: 0 8px 20px 0 rgba(19, 2, 250,0.2);
+            box-shadow: 0 0px 20px 0 rgba(0, 0, 255,0.5);
             transform: scale(1.01);
             cursor: pointer;
         }

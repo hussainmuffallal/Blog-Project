@@ -257,13 +257,13 @@
                 <a class="nav-link text-black" href="dashboard.php">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-black" href="blogs.php">About Us</a>
+                <a class="nav-link text-black" href="#">About Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-black" href="blogs.php">Contact Us</a>
+                <a class="nav-link text-black" href="#">Contact Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-black" href="blogs.php">Services</a>
+                <a class="nav-link text-black" href="#">Services</a>
               </li>&nbsp;
             </ul> 
               <a class="btn btn-outline-success text-black" href="login.php">Login</a>
