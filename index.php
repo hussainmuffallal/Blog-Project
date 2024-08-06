@@ -353,7 +353,7 @@
         <div class="footer">
           <section>
             <ul class="links mb-5">
-              <li><img src="img/favicon_io/favicon-32x32.png" alt="logo"></li>
+              <li class="mb-2"><img src="img/favicon_io/favicon-32x32.png" alt="logo"></li>
               <li><a href="index.php">Home</a></li>
               <li><a href="blogs.php">Blogs</a></li>
               <li><a href="login.php">Login</a></li>
