@@ -63,7 +63,7 @@
         .feature-img {
             width: 530px;
             position: absolute;
-            bottom: 0;
+            bottom: 40px;
             right: 10%;
         }
 
