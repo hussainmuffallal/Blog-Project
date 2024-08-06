@@ -33,7 +33,7 @@ Please credit the author when using or adapting the content. For code, include a
 - **Bootstrap**: The website design utilizes Bootstrap, which is licensed under the MIT License.
 
 ## Acknowledgments:
-- I would like to express my sincere gratitude to Teran Subasinghe (My mentor)
+- I would like to express my sincere gratitude to <a href="https://github.com/teran-s">Teran Subasinghe</a> (My mentor)
 
 
 # Contact:
