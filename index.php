@@ -256,7 +256,7 @@
           <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav nav-underline ">
               <li class="nav-item">
-                <a class="nav-link text-black" href="blogs.php">Blogs</a>
+                <a class="nav-link text-black" href="blogs.php">Blog</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-black" href="dashboard.php">Dashboard</a>
