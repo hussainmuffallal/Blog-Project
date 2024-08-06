@@ -73,6 +73,26 @@
             text-align: center;
         }
 
+        .card-container {
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            margin-left: 25%;
+            margin-right: 25%;
+            width: 50%;
+            text-align: center;
+        }
+
+        .card-date {
+            color: #999;
+        }
+
+        .card {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
     </style>
 </head>
   <body>
@@ -157,10 +177,10 @@
                     // Fetch the rows
                     while ($row = $result->fetch_assoc()) {
                         // Display the data in table rows
-                        echo "<div class='text-center mt-5'>";
-                        echo "<div class='fw-bold'>" . date('Y-m-d', strtotime($row['CreatedDate'])) . "</div>";
-                        echo "<div class='mb-4 fw-bold'>" . $row["Title"] . "</div>";
+                        echo "<div class='text-center mt-3'>";
+                        echo "<div class='mb-4 fs-2 fw-bold'>" . $row["Title"] . "</div>";
                         echo "<div class='content'>" . $row["Content"] . "</div>";
+                        echo "<div class='card-date mt-5'>" . date('Y-m-d', strtotime($row['CreatedDate'])) . "</div>";
                         echo "</div>";
                     }
                 } else {
@@ -178,8 +198,8 @@
 
             <!-- Comments -->
 
-            
-            <div class="container text-center mt-3 mb-5">Leave a comment
+            <div class="fs-4 fw-bold text-center">Leave a comment</div>
+            <div class="container text-center mt-3 mb-5">
                 <form action="dbcomments.php" method="POST" class="align-items-center mt-3">
                     <div>
                         <input type="hidden" name="postid" value="<?php echo $postid; ?>">
@@ -194,86 +214,84 @@
             </div>
             
 
-            <div class="container-md text-center mt-3">
-            <div class="mb-4 fw-bold">Comments</div>
+        <div class="fs-4 fw-bold text-center">Comments</div>
             <div class="card-container">
 
 
-            <?php
-                // Connect to the MySQL database
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $dbname = "blog_project";
+                <?php
+                    // Connect to the MySQL database
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname = "blog_project";
 
-                $conn = new mysqli($servername, $username, $password, $dbname);
+                    $conn = new mysqli($servername, $username, $password, $dbname);
 
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
+                    // Check connection
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
 
-                // Get the value of $postid from the URL parameter
-                if(isset($_GET['PostId'])){
-                    $postid = $_GET['PostId'];
-                } else {
-                    $postid = '';
-                }
+                    // Get the value of $postid from the URL parameter
+                    if(isset($_GET['PostId'])){
+                        $postid = $_GET['PostId'];
+                    } else {
+                        $postid = '';
+                    }
 
-                // Get the value of $email from the URL parameter
-                if(isset($_GET['Email'])){
-                    $email = $_GET['Email'];
-                } else {
-                    $email = '';
-                }
+                    // Get the value of $email from the URL parameter
+                    if(isset($_GET['Email'])){
+                        $email = $_GET['Email'];
+                    } else {
+                        $email = '';
+                    }
 
-                
-                //Check if a search request is made
-                if(isset($_GET['search'])){
-                    $search=$_GET['search'];
-                    if($search==''){
-                        //All the records
-                        $sql = "SELECT CommentId,PostId,CreatedDate,Description FROM comment WHERE email = '$email' ORDER BY CreatedDate DESC";
-                   }
-                    $sql = "SELECT CommentId,PostId,CreatedDate,Description FROM comment WHERE email = '$email' AND Description LIKE '%$search%' ORDER BY CreatedDate DESC";
-                }else{
-                    // SQL query to select the desired columns from the "post" table
-                    $sql = "SELECT CommentId, PostId, CreatedDate, Description FROM comment WHERE PostId = '$postid' ORDER BY CreatedDate DESC";
-                }
+                    
+                    //Check if a search request is made
+                    if(isset($_GET['search'])){
+                        $search=$_GET['search'];
+                        if($search==''){
+                            //All the records
+                            $sql = "SELECT CommentId,PostId,CreatedDate,Description FROM comment WHERE email = '$email' ORDER BY CreatedDate DESC";
+                    }
+                        $sql = "SELECT CommentId,PostId,CreatedDate,Description FROM comment WHERE email = '$email' AND Description LIKE '%$search%' ORDER BY CreatedDate DESC";
+                    }else{
+                        // SQL query to select the desired columns from the "post" table
+                        $sql = "SELECT CommentId, PostId, CreatedDate, Description FROM comment WHERE PostId = '$postid' ORDER BY CreatedDate DESC";
+                    }
 
-                $sql = "SELECT c.CommentId, c.PostId, c.CreatedDate, c.Description, u.firstname 
-                FROM comment c 
-                JOIN user u ON c.email = u.email 
-                WHERE c.PostId = '$postid' 
-                ORDER BY c.CreatedDate DESC";
+                    $sql = "SELECT c.CommentId, c.PostId, c.CreatedDate, c.Description, u.firstname 
+                    FROM comment c 
+                    JOIN user u ON c.email = u.email 
+                    WHERE c.PostId = '$postid' 
+                    ORDER BY c.CreatedDate DESC";
 
 
-                // Execute the query
-                $result = $conn->query($sql);
+                    // Execute the query
+                    $result = $conn->query($sql);
 
-                // Check if the query was successful
-                if ($result->num_rows > 0) {
-                    // Fetch the rows
-                while ($row = $result->fetch_assoc()) {
-                    $lname = $row["Description"];
-                    $cdate = date("Y-m-d", strtotime($row["CreatedDate"])); // Extract date portion from CreatedDate
-                    $postid = $row["PostId"];
-                    $firstname = $row["firstname"]; // Get the firstname from the row
+                    // Check if the query was successful
+                    if ($result->num_rows > 0) {
+                        // Fetch the rows
+                    while ($row = $result->fetch_assoc()) {
+                        $lname = $row["Description"];
+                        $cdate = date("Y-m-d", strtotime($row["CreatedDate"])); // Extract date portion from CreatedDate
+                        $postid = $row["PostId"];
+                        $firstname = $row["firstname"]; // Get the firstname from the row
 
-                    // Display the data in table rows
-                    echo "<div class='card mb-5'><div class='card-body'><h5 class='card-title'>$firstname commented:</h5><p class='card-text'>$lname</p><p class='card-text'>$cdate</p></div></div>";
-                }
+                        // Display the data in table rows
+                        echo "<div class='card'><div class='card-body'><h5 class='card-title'>$firstname commented:</h5><p class='card-text'>$lname</p><p class='card-text'>$cdate</p></div></div>";
+                    }
 
-                } else {
-                    echo "Be the first to comment on this post!";
-                }
+                    } else {
+                        echo "Be the first to comment on this post!";
+                    }
 
-                // Close the connection
-                $conn->close();
+                    // Close the connection
+                    $conn->close();
                 ?>
-            </tbody>
-        </table>  
-      </div>
+            </div>   
+        </div>
 
       
           
