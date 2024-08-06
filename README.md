@@ -30,9 +30,11 @@ The text, images, and other content of this blog are licensed under a [Creative 
 - **Attribution:**
 Please credit the author when using or adapting the content. For code, include a notice as specified in the MIT License. For content, include a link back to this site or the original content page.
 
+- **Bootstrap**: The website design utilizes Bootstrap, which is licensed under the MIT License.
+
 ## Acknowledgments:
 - **Teran Subasinghe:** I would like to thank my mentor.
-- **Bootstrap**: The website design utilizes Bootstrap, which is licensed under the MIT License.
+
 
 # Contact:
 ____________
