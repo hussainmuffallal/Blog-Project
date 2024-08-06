@@ -266,9 +266,6 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link text-black" href="#">Contact Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-black" href="#">Services</a>
               </li>&nbsp;
             </ul> 
               <a class="btn btn-outline-success text-black" href="login.php">Login</a>
