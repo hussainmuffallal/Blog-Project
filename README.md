@@ -12,9 +12,9 @@ A web-based platform for creating and sharing blog posts. Users can publish arti
 * Version Control: Git, GitHub
  
 # Usage:
-Users can create, edit, and delete posts.
-Users can comment on posts.
-The blog displays posts in a user-friendly format.
+* Users can create, edit, and delete posts.
+* Users can comment on posts.
+* The blog displays posts in a user-friendly format.
 
 # Contributing:
 Feel free to fork the repository and submit pull requests.
