@@ -19,7 +19,7 @@ The blog displays posts in a user-friendly format.
 **Contributing:**
 Feel free to fork the repository and submit pull requests.
 
-**License:**
+
 ## License
 
 ### Code License
