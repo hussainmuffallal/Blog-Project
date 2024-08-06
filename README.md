@@ -1,4 +1,5 @@
 # Blog-Project
+**Blog Website**
 
 **Description:**
 A web-based platform for creating and sharing blog posts. Users can publish articles and interact through comments.A simple blog application with features for creating and publishing posts.
