@@ -1,22 +1,22 @@
 # Blog Website
 
-**Description:**
+# Description:
 A web-based platform for creating and sharing blog posts. Users can publish articles and interact through comments.A simple blog application with features for creating and publishing posts.
 
 ![Screenshot of the blog homepage](img/Screenshot.PNG)
 
-**Technologies Used:**
+# Technologies Used:
 * Programming language: HTML, CSS, PHP, JavaScript
 * Framework: Bootstrap
 * Database: MySQL
 * Version Control: Git, GitHub
  
-**Usage:**
+# Usage:
 Users can create, edit, and delete posts.
 Users can comment on posts.
 The blog displays posts in a user-friendly format.
 
-**Contributing:**
+# Contributing:
 Feel free to fork the repository and submit pull requests.
 
 # License
@@ -33,5 +33,5 @@ Please credit the author when using or adapting the content. For code, include a
 **Acknowledgments**
 - **Bootstrap**: The website design utilizes Bootstrap, which is licensed under the MIT License.
 
-**Contact:**
+# Contact:
 ____________
