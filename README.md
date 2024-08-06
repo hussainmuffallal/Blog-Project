@@ -17,7 +17,7 @@ A web-based platform for creating and sharing blog posts. Users can publish arti
 * The blog displays posts in a user-friendly format.
 
 # Contributing:
-Feel free to fork the repository and submit pull requests.
+* Feel free to fork the repository and submit pull requests.
 
 # License:
 
