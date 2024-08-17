@@ -357,10 +357,11 @@
               <li><a href="register.php">Register</a></li>
             </ul>
             <ul class="social-icons mb-2">
-              <li><a href="https://twitter.com/"><img src="img/twitter.png" alt="twitter" style="width: 32px; height: 32px;"></a></li>
-              <li><a href="https://www.facebook.com/"><img src="img/facebook.png" alt="facebook" style="width: 32px; height: 32px;"></a></li>
-              <li><a href="https://www.instagram.com/"><img src="img/instagram.png" alt="instagram" style="width: 32px; height: 32px;"></a></li>
-              <li><a href="https://www.linkedin.com/"><img src="img/linkedin.png" alt="linkedin" style="width: 32px; height: 32px;"></a></li>
+              <li><a href="https://twitter.com/" target="_blank"><img src="img/twitter.png" alt="twitter" style="width: 32px; height: 32px;"></a></li>
+              <li><a href="https://www.facebook.com/" target="_blank"><img src="img/facebook.png" alt="facebook" style="width: 32px; height: 32px;"></a></li>
+              <li><a href="https://www.instagram.com/" target="_blank"><img src="img/instagram.png" alt="instagram" style="width: 32px; height: 32px;"></a></li>
+              <li><a href="https://www.linkedin.com/" target="_blank"><img src="img/linkedin.png" alt="linkedin" style="width: 32px; height: 32px;"></a></li>
+              <li><a href="https://github.com/hussainmuffallal/Blog-Project" target="_blank"><img src="img/github-logo.png" alt="github" style="width: 32px; height: 32px;"></a></li>
             </ul>
           </section>
             © 2024 Blog Platform. All rights reserved.
