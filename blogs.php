@@ -75,7 +75,36 @@
             position: absolute;
             bottom: 30px;
             color: #999;
-        }
+      }
+
+      .pagination {
+          display: flex;
+          justify-content: center;
+          margin-top: 20px;
+          margin-bottom: 20px;
+      }
+
+      .prev, .next {
+          margin: 5px 10px;
+          padding: 5px 10px;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+
+      .prev i, .next i {
+          font-size: 16px;
+          color: #333;
+          margin: 5px 10px;
+          padding: 5px 10px;
+      }
+
+      .pagination a.active {
+          background-color: #337ab7;
+          color: #fff;
+          margin: 5px 10px;
+          padding: 5px 10px;
+          border-radius: 5px;
+      }
 
     </style>
 </head>
@@ -127,8 +156,14 @@
               die("Connection failed: " . $conn->connect_error);
           }
 
+          $total_posts = $conn->query("SELECT COUNT(*) FROM post")->fetch_assoc()['COUNT(*)'];
+          $posts_per_page = 6;
+          $total_pages = ceil($total_posts / $posts_per_page);
+          $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+          $offset = ($current_page - 1) * $posts_per_page;
+
           // Retrieve all posts from the database
-          $sql = "SELECT * FROM post ORDER BY CreatedDate DESC";
+          $sql = "SELECT * FROM post ORDER BY CreatedDate DESC LIMIT $posts_per_page OFFSET $offset";
           $result = $conn->query($sql);
 
           if ($result->num_rows > 0) {
@@ -144,13 +179,36 @@
                 echo "</div></a>";
                 echo "</div>";
               }
+
             } else {
-              echo "There are no posts available.Start creating some!";
+              echo "There are no posts available. Start creating some!";
             } 
+
+            
 
           $conn->close();
           ?>
         </div>
+
+      <div class="pagination">
+        <?php
+        // Display the pagination links at the bottom of the page
+        echo "<div class='pagination text-center'>";
+        if ($current_page > 1) {
+            echo "<a href='?page=" . ($current_page - 1) . "' class='prev'><i class='fa fa-chevron-left'></i> Prev</a>";
+        }
+        for ($i = 1; $i <= $total_pages; $i++) {
+            if ($i == $current_page) {
+                echo "<a href='?page=$i' class='active'>$i</a>";
+            } else {
+                echo "<a href='?page=$i'>$i</a>";
+            }
+        }
+        if ($current_page < $total_pages) {
+            echo "<a href='?page=" . ($current_page + 1) . "' class='next'>Next <i class='fa fa-chevron-right'></i></a>";
+        }
+        echo "</div>";
+        ?>
       </div>
     
 
