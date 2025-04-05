@@ -328,7 +328,8 @@
           } else {
               echo "No blogs found.";
           }
-
+          
+          // Close the database connection
           $conn->close();
         ?>
       </div>
