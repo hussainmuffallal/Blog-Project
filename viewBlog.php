@@ -260,6 +260,8 @@
                         $sql = "SELECT CommentId, PostId, CreatedDate, Description FROM comment WHERE PostId = '$postid' ORDER BY CreatedDate DESC";
                     }
 
+                    
+                    // Inner Join - Selects the specific comment of the specific user of the specific post
                     $sql = "SELECT c.CommentId, c.PostId, c.CreatedDate, c.Description, u.firstname 
                     FROM comment c 
                     JOIN user u ON c.email = u.email 
